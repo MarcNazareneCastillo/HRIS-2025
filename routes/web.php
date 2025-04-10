@@ -25,10 +25,10 @@ Route::middleware(['guest'])->group(function () {
     })->name('onboarding');
 
     Route::get('/register/step1', [OnboardingController::class, 'showStep1'])->name('onboarding.step1');
-    Route::post('/register/step1', [OnboardingController::class, 'processStep1']);
+    Route::post('/register/step1', [OnboardingController::class, 'processStep1'])->name('onboarding.processStep1');
     
     Route::get('/register/step2', [OnboardingController::class, 'showStep2'])->name('onboarding.step2');
-    Route::post('/register/step2', [OnboardingController::class, 'processStep2']);
+    Route::post('/register/step2', [OnboardingController::class, 'processStep2'])->name('onboarding.processStep2');
     
     Route::get('/register/step3', [OnboardingController::class, 'showStep3'])->name('onboarding.step3');
     Route::post('/register/step3', [OnboardingController::class, 'processStep3']);
@@ -59,6 +59,10 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
             default => abort(403),
         };
     })->name("dashboard");
+
+    Route::get("/profile", function () {
+        return view("profile.index");
+    })->name("profile");
 
     Route::get("/logout", [LoginController::class, 'logout'])->name("logout");
         
